@@ -40,7 +40,7 @@ d3.csv("assets/data/data.csv")
       .domain([0, d3.max(StateData, d => d.healthcare)])
       .range([height, 0]);
 
-    
+        
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
@@ -62,20 +62,22 @@ d3.csv("assets/data/data.csv")
     .attr("r", "15")
     .attr("fill", "blue")
     .attr("opacity", ".5")
-    .append("text")
-    .text(d=>d.abbr)
-    .attr('fill', 'white')
-
-
-
-    // circlesGroup.append('text')
-        
-    //         .attr('fill-opacity', 0)
-    //         .attr('fill', 'white')
-    //         .text("d => d.abbr")
-                
+    
     
 
+let texts = chartGroup.selectAll(null)
+    .data(StateData)
+    .enter()
+    .append('text')
+    .text(d => d.abbr)
+    .attr('color', 'black')
+    .attr('font-size', 10)
+    .attr('text-anchor', 'middle')
+    .attr('alignment-baseline', 'middle')    
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    
+       
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
